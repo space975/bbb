@@ -2,8 +2,8 @@
 set -e
 
 # ===== 설정: 여기에 Google Drive 파일 ID와 출력 파일명 쓰기 =====
-FILE_ID="1AbCdEfGhIJkLmnopQRs"
-OUTFILE="문제_생성기.zip"
+FILE_ID="1EVf5-Our9h5Cd8XH2WquE8bDDBtvi0VJ"
+OUTFILE="과제_생성기.zip"
 # =============================================================
 
 # 1) gdown 있는지 확인, 없으면 설치 시도
