@@ -1,9 +1,27 @@
-#!/bin/bash
-FILE_ID="구글드라이브_파일_ID"
-FILE_NAME="문제_생성기.zip"
+#!/usr/bin/env bash
+set -e
 
-# gdown 설치 필요 (Python)
-pip install gdown
+# ===== 설정: 여기에 Google Drive 파일 ID와 출력 파일명 쓰기 =====
+FILE_ID="1AbCdEfGhIJkLmnopQRs"
+OUTFILE="문제_생성기.zip"
+# =============================================================
 
-# Google Drive에서 다운로드
-gdown $FILE_ID -O $FILE_NAME
+# 1) gdown 있는지 확인, 없으면 설치 시도
+if ! command -v gdown >/dev/null 2>&1; then
+  echo "gdown not found. Installing..."
+  pip install --user gdown || { echo "pip install failed. Please install gdown manually."; exit 1; }
+fi
+
+# 2) 다운로드
+echo "Downloading ${OUTFILE} from Google Drive (id=${FILE_ID})..."
+gdown "${FILE_ID}" -O "${OUTFILE}"
+
+# 3) 압축 풀기 (원하면)
+if command -v unzip >/dev/null 2>&1; then
+  echo "Unzipping ${OUTFILE}..."
+  unzip -o "${OUTFILE}"
+else
+  echo "unzip not found. Please unzip ${OUTFILE} manually."
+fi
+
+echo "Done."
